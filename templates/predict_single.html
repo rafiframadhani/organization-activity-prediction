@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict Single Member - Auxen ActiTrackAI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Predict Single Member</h1>
+        <p>Enter the member's details below:</p>
+        <form action="/predict_single" method="post" class="single-prediction-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Position:</label>
+                    <select id="position" name="position" required>
+                        {% for pos in positions %}
+                            <option value="{{ pos }}">{{ pos }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="event_attendance">Event Attendance:</label>
+                    <input type="text" id="event_attendance" name="event_attendance" pattern="^\d{1,2}/\d{1,2}$" placeholder="e.g., 8/10" required>
+                    <span class="hint">Format: 'x/y' (e.g., 7/10 for 70%)</span>
+                </div>
+                <div class="form-group">
+                    <label for="meeting_attendance">Meeting Attendance:</label>
+                    <input type="text" id="meeting_attendance" name="meeting_attendance" pattern="^\d{1,2}/\d{1,2}$" placeholder="e.g., 9/10" required>
+                    <span class="hint">Format: 'x/y' (e.g., 7/10 for 70%)</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="duty_participation">Duty Participation:</label>
+                    <input type="text" id="duty_participation" name="duty_participation" pattern="^\d{1,2}/\d{1,2}$" placeholder="e.g., 7/10" required>
+                    <span class="hint">Format: 'x/y' (e.g., 7/10 for 70%)</span>
+                </div>
+                <div class="form-group">
+                    <label for="submitted_works">Submitted Works:</label>
+                    <input type="number" id="submitted_works" name="submitted_works" min="0" value="0" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="competition_participation">Competition Participation:</label>
+                    <input type="number" id="competition_participation" name="competition_participation" min="0" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="chat_activity">Chat Activity:</label>
+                    <select id="chat_activity" name="chat_activity" required>
+                        {% for chat_act in chat_activities %}
+                            <option value="{{ chat_act }}">{{ chat_act }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="button">Get Prediction</button>
+        </form>
+        <a href="/" class="button secondary-button">Back to Main Options</a>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

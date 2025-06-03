@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Results - Auxen ActiTrackAI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Results</h1>
+        <p>Below are the results of your analysis:</p>
+
+        {% if is_mass_prediction %}
+            <h2>Mass Prediction Results</h2>
+            {{ tables|safe }}
+
+<div class="activity-composition-section">
+    <h2>Activity Status Composition</h2>
+    <p>Distribution of predicted activity statuses:</p>
+    <div class="composition-chart">
+        {% set total_members = status_composition.values() | sum %}
+        {% for status, count in status_composition.items() %}
+            {% set percentage = (count / total_members * 100) if total_members > 0 else 0 %}
+            <div class="composition-bar-container">
+                <span class="status-name">{{ status }}: {{ count }} members</span>
+                <div class="composition-bar" style="
+                    width: {{ percentage | round(2) }}%;
+                    background-color: 
+                        {% if status == 'Very Active' %}var(--color-very-active)
+                        {% elif status == 'Active' %}var(--color-active)
+                        {% elif status == 'Moderate' %}var(--color-moderate)
+                        {% elif status == 'Rarely Active' %}var(--color-rarely-active)
+                        {% else %}var(--color-inactive)
+                        {% endif %}
+                    ;">
+                    {{ percentage | round(2) }}%
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+        {% else %}
+            <h2>Single Member Prediction</h2>
+            <div class="single-result-card">
+                <p><strong>Name:</strong> {{ single_prediction_result.name }}</p>
+                <p><strong>Position:</strong> {{ single_prediction_result.position }}</p>
+                <p><strong>Predicted Activity Score:</strong> {{ single_prediction_result.score }} / 100</p>
+                <p><strong>Predicted Activity Status:</strong> <strong style="color: 
+                    {% if single_prediction_result.status == 'Very Active' %}var(--color-very-active);
+                    {% elif single_prediction_result.status == 'Active' %}var(--color-active);
+                    {% elif single_prediction_result.status == 'Moderate' %}var(--color-moderate);
+                    {% elif single_prediction_result.status == 'Rarely Active' %}var(--color-rarely-active);
+                    {% else %}var(--color-inactive);
+                    {% endif %};">
+                    {{ single_prediction_result.status }}
+                </strong></p>
+            </div>
+
+            <div class="recommendations-section">
+                <h3>Recommended Actions:</h3>
+                {% if single_prediction_result.recommendations %}
+                    <ul>
+                        {% for rec in single_prediction_result.recommendations %}
+                            <li>{{ rec }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No specific recommendations generated at this time.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+<div class="feature-importance-section">
+    <h2>Feature Importance (Most Influential Factors)</h2>
+    <p>This shows which features had the most impact on predicting activity scores:</p>
+    <div class="composition-chart">
+        {% set total_importance = feature_importances.values()|sum %}
+        {% for feature, importance in feature_importances.items() %}
+            {% set percentage = (importance / total_importance * 100) if total_importance > 0 else 0 %}
+            <div class="composition-bar-container">
+                <span class="status-name">
+                    {{ feature.replace('_norm', ' (Normalized)').replace('_encoded', '').replace('_', ' ').title() }}:
+                    {{ (importance * 100)|round(2) }}%
+                </span>
+                <div class="composition-bar" style="
+                    width: {{ percentage | round(2) }}%;
+                    background-color: #6c63ff;">
+                    {{ percentage | round(2) }}%
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+        <a href="/" class="button secondary-button">Go to Main Options</a>
+        <a href="/single_prediction" class="button">Predict Another Member</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

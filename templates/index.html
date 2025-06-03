@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AuxenAI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Activity Prediction</h1>
+        <h3>Predict your organization activeness with Machine Learning</h3>
+        <p>Choose an option below:</p>
+
+        <div class="option-section">
+            <h2>Predict Multiple Members</h2>
+            <p>Upload a CSV file containing data for multiple members:</p>
+            <form action="/predict_mass" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv" required>
+                <button type="submit">Upload and Predict</button>
+            </form>
+        </div>
+
+        <div class="option-section">
+            <h2>Predict Single Member</h2>
+            <p>Enter data for one member to get a personalized prediction:</p>
+            <a href="/single_prediction" class="button">Predict Single Member</a>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

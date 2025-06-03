@@ -1,0 +1,350 @@
+/* static/style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+:root {
+    --color-very-active: green;
+    --color-active: #28a745; /* Slightly lighter green */
+    --color-moderate: orange;
+    --color-rarely-active: salmon;
+    --color-inactive: red;
+}
+
+
+.container {
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+p, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Base form styling - applied to forms generally */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input[type="file"], input[type="text"], input[type="number"], select {
+    margin-bottom: 15px; /* This will be overridden by .form-group's margin-bottom in single form */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%; /* This will be overridden by .form-group input's width */
+    max-width: 400px; /* This will be overridden by .form-group input's max-width */
+    box-sizing: border-box;
+}
+
+button[type="submit"], .button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    text-decoration: none; 
+    display: inline-block; 
+    margin-top: 10px; 
+}
+
+button[type="submit"]:hover, .button:hover {
+    background-color: #0056b3;
+}
+
+.button.secondary-button {
+    background-color: #8eab2c;
+}
+
+.button.secondary-button:hover {
+    background-color: #326f1c;
+}
+
+.option-section {
+    background-color: #e9f7ef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.option-section h2 {
+    color: #32b952;
+    margin-top: 0;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.flashes li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.flashes .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flashes .warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.flashes .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Styles for table data */
+table.data {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    table-layout: fixed; /* Menyesuaikan lebar kolom */
+}
+table.data th, table.data td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    word-wrap: break-word; /* Mencegah teks panjang merusak layout */
+}
+table.data th {
+    background-color: #f2f2f2;
+    font-size: 0.9em; /* Kecilkan font header agar pas */
+}
+table.data td {
+    font-size: 0.9em;
+}
+
+/* Styles for Feature Importance */
+.feature-importance-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.feature-importance-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feature-importance-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.feature-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-name {
+    min-width: 200px; /* Lebarkan sedikit agar nama fitur tidak terpotong */
+    text-align: right;
+    font-weight: bold;
+    color: #555;
+    flex-shrink: 0; /* Jangan biarkan menyusut */
+}
+
+.feature-bar {
+    flex-grow: 1;
+    height: 25px;
+    background-color: #4CAF50; /* Warna hijau */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: width 0.5s ease-in-out; /* Animasi perubahan lebar */
+    overflow: hidden; /* Sembunyikan teks yang meluber */
+}
+
+/* Styles for Single Result Card */
+.single-result-card {
+    background-color: #e6f7ff; /* Light blue background */
+    border: 1px solid #b3e0ff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: left;
+}
+.single-result-card h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.single-result-card p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+.single-result-card p strong {
+    color: #333;
+}
+
+/* Styles for Recommendations Section */
+.recommendations-section {
+    margin-top: 30px;
+    background-color: #fff9e6; /* Light yellow background */
+    border: 1px solid #ffe0b3;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.recommendations-section h3 {
+    color: #e69900;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.recommendations-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+.recommendations-section ul li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* Styles for Activity Composition Graph */
+.activity-composition-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.activity-composition-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.composition-chart {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.composition-bar-container {
+    background-color: #d8f1ff;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.status-name {
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+    color: #444;
+}
+
+.composition-bar {
+    height: 24px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: width 0.3s ease-in-out;
+}
+
+
+
+
+.single-prediction-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px; 
+    margin: 20px auto;
+}
+
+.single-prediction-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 15px; 
+}
+
+@media (min-width: 600px) {
+    .single-prediction-form .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.single-prediction-form .form-group {
+    margin-bottom: 0;
+}
+
+.single-prediction-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.single-prediction-form .form-group input[type="text"],
+.single-prediction-form .form-group input[type="number"],
+.single-prediction-form .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.single-prediction-form .form-group .hint {
+    font-size: 0.85em; 
+    color: #888;
+    margin-top: 5px;
+    display: block;
+}
+
+.single-prediction-form button[type="submit"] {
+    margin-top: 20px;
+    align-self: center;
+}

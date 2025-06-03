@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Machine Learning specific
+model/*.pkl # Abaikan file model dan encoder hasil training
+# KECUALI Anda memang ingin menyertakan model yang sudah trained di repo.
+# Jika ingin menyertakan model, hapus baris di atas dan tambahkan secara spesifik file yang ingin diabaikan saja.
+
+# Flask specific
+instance/
+.flaskenv
+
+# Uploads
+uploads/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
